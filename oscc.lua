@@ -68,7 +68,7 @@ opt.read_options(user_opts, "osc", function(list) update_options(list) end)
 local osc_param = { -- calculated by osc_init()
     playresy = 0,                           -- canvas size Y
     playresx = 0,                           -- canvas size X
-    display_aspect = 0,
+    display_aspect = 1,
     unscaled_y = 0,
     areas = {},
     video_margins = {
@@ -2479,7 +2479,13 @@ function get_hidetimeout()
 end
 
 function always_on(val)
-  show_osc()
+    if state.enabled then
+        if val then
+            show_osc()
+        else
+            hide_osc()
+        end
+    end
 end
 
 
