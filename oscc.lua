@@ -819,11 +819,11 @@ function render_elements(master_ass)
                         local osd_w = mp.get_property_number("osd-dimensions/w")
                         if osd_w then
                             local r_w, r_h = get_virt_scale_factor()
-                            local thumb_pad = 6
-                            local thumb_margin_x = 20
+                            local thumb_pad = 2
+                            local thumb_margin_x = 20 / r_w
                             local thumb_margin_y = 4
                             local thumb_x = math.min(osd_w - thumbfast.width - thumb_margin_x, math.max(thumb_margin_x, tx / r_w - thumbfast.width / 2))
-                            local thumb_y = ((ty - (user_opts.layout == "bottombar" and 39 or 18) - user_opts.barmargin) / r_h - (user_opts.layout == "topbar" and -(30 + user_opts.barmargin) / r_h or thumbfast.height)) - thumb_margin_y
+                            local thumb_y = user_opts.layout == "bottombar" and ty / r_h - thumbfast.height - user_opts.tooltipfontsize / r_h - thumb_margin_y or ty / r_h + thumb_margin_y
 
                             elem_ass:new_event()
                             elem_ass:pos(thumb_x * r_w, thumb_y * r_h)
