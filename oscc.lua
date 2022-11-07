@@ -132,7 +132,8 @@ local state = {
 local thumbfast = {
     width = 0,
     height = 0,
-    disabled = false
+    disabled = true,
+    available = false
 }
 
 
@@ -815,8 +816,8 @@ function render_elements(master_ass)
                     elem_ass:append(tooltiplabel)
 
                     -- thumbnail
-                    if not thumbfast.disabled and thumbfast.width ~= 0 and thumbfast.height ~= 0 then
-                        local osd_w = mp.get_property_number("osd-dimensions/w")
+                    if not thumbfast.disabled then
+                        local osd_w = mp.get_property_number("osd-width")
                         if osd_w then
                             local r_w, r_h = get_virt_scale_factor()
                             local thumb_pad = 2
@@ -825,12 +826,15 @@ function render_elements(master_ass)
                             local thumb_x = math.min(osd_w - thumbfast.width - thumb_margin_x, math.max(thumb_margin_x, tx / r_w - thumbfast.width / 2))
                             local thumb_y = user_opts.layout == "bottombar" and ty / r_h - thumbfast.height - user_opts.tooltipfontsize / r_h - thumb_margin_y or ty / r_h + thumb_margin_y
 
+                            thumb_x = math.floor(thumb_x + 0.5)
+                            thumb_y = math.floor(thumb_y + 0.5)
+
                             elem_ass:new_event()
                             elem_ass:pos(thumb_x * r_w, thumb_y * r_h)
                             elem_ass:append(osc_styles.box)
                             elem_ass:append("{\\1a&H20&}")
                             elem_ass:draw_start()
-                            elem_ass:rect_cw(-thumb_pad * r_h, -thumb_pad * r_h, (thumbfast.width + thumb_pad) * r_w, (thumbfast.height + thumb_pad) * r_h)
+                            elem_ass:rect_cw(-thumb_pad * r_w, -thumb_pad * r_h, (thumbfast.width + thumb_pad) * r_w, (thumbfast.height + thumb_pad) * r_h)
                             elem_ass:draw_stop()
 
                             mp.commandv("script-message-to", "thumbfast", "thumb",
@@ -852,7 +856,7 @@ function render_elements(master_ass)
                       elem_ass:rect_ccw(0, 0, tx - ww, elem_geo.h)
                     end
                 else
-                    if thumbfast.width ~= 0 and thumbfast.height ~= 0 then
+                    if thumbfast.available then
                         mp.commandv("script-message-to", "thumbfast", "clear")
                     end
                 end
