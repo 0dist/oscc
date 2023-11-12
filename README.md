@@ -1,21 +1,25 @@
 
-![example](https://github.com/longtermfree/oscc/blob/main/interface.jpg)
+![example](https://github.com/longtermfree/oscc/blob/main/example.jpg)
 
 Based on the original [osc](https://github.com/mpv-player/mpv/blob/master/player/lua/osc.lua)
-## Install
-[oscc.lua](https://github.com/longtermfree/oscc/blob/main/oscc.lua) into your mpv `scripts` folder
 
-[oscc.ttf](https://github.com/longtermfree/oscc/blob/main/oscc.ttf) into `fonts` folder, if you dont have - create one
+Compatible with [thumbfast](https://github.com/po5/thumbfast)
 
-## Configuration
-In your `mpv.conf`
+## How to install
+Make sure you already have or created `mpv.conf` file, `scripts`, `script-opts` and `fonts` folders in your mpv directory
+
+[oscc.lua](https://github.com/longtermfree/oscc/blob/main/oscc.lua) into `scripts`
+
+[oscc.ttf](https://github.com/longtermfree/oscc/blob/main/oscc.ttf) into `fonts`
+
+In `mpv.conf` put:
 
 ```
 osc=no
 cursor-autohide=3500         #synchronized with hidetimeout
 osd-bar=no
 ```
-Volume seekbar could be disabled in `osc.conf` which is in `script-opts`
+Volume slider could be disabled in `osc.conf` which is in `script-opts`
 ```
 volseekbar=no
 ```
