@@ -1,6 +1,9 @@
 
 ![example](https://github.com/longtermfree/oscc/blob/main/example.jpg)
 
+> [!IMPORTANT]  
+> v0.37.0 and up are currently not supported
+
 Based on the original [osc](https://github.com/mpv-player/mpv/blob/master/player/lua/osc.lua)
 
 Compatible with [thumbfast](https://github.com/po5/thumbfast)
