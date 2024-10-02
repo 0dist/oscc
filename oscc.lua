@@ -1942,13 +1942,21 @@ function update_margins()
     reset_margins()
 
 
-    utils.shared_script_property_set("osc-margins",
-        string.format("%f,%f,%f,%f", margins.l, margins.r, margins.t, margins.b))
+    if mp.del_property then
+        mp.set_property_native("user-data/osc/margins", margins)
+    else
+        utils.shared_script_property_set("osc-margins",
+            string.format("%f,%f,%f,%f", margins.l, margins.r, margins.t, margins.b))   
+    end
 end
 
 function shutdown()
     reset_margins()
-    utils.shared_script_property_set("osc-margins", nil)
+    if mp.del_property then
+        mp.del_property("user-data/osc/margins")
+    else
+        utils.shared_script_property_set("osc-margins", nil)
+    end
 end
 
 --
